@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini game</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffe6f2;
+            font-family: Arial, sans-serif;
+
+        }
+
+        header {
+            background: #ffffff;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            color: #c24f8a;
+            font-weight: bold;
+        }
+
+        #playMusic {
+            padding: 8px 16px;
+            background-color: #ffe6f2;
+            border: 2px solid #ffb6d9;
+            color: #c24f8a;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-left: 20px;
+        }
+
+        #playMusic:hover {
+            background-color: #c24f8a;
+            color: #ffe6f2;
+        }
+
+        nav {
+            background: #ffb6d9;
+            padding: 12px 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            border-bottom: 3px solid #ffffff;
+
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            align-items: center;
+
+        }
+
+
+        nav a{
+            color: white;
+            text-decoration: none;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-family: 'Segoe UI', sans-serif;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #c24f8a;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            color: #b0427d;
+        }
+
+        h1{
+            margin: 30px auto;
+            font-size: 32px;
+            color: #c24f8a;
+            font-weight: bold;
+            text-align: center; 
+        }
+
+        p{
+            color: #c24f8a;
+            text-align: center; 
+        }
+
+        .game-box {
+            background: white;
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 6px 6px rgba(0,0,0,0.05);
+            }
+
+        .game-box h2{
+            color: #b0427d;
+        }
+
+        .game-box p{
+            color: #5a3a4e;
+        }
+
+        #timer{
+            color: #5a3a4e;
+        }
+
+        #score{
+            color: #5a3a4e;
+        }
+
+
+            #heartBtn {
+            font-size: 50px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin: 15px 0;
+            transition: .2s;
+            }
+
+            #heartBtn:active {
+            transform: scale(1.2);
+            }
+
+
+             #matchCount{
+            color: #5a3a4e;
+            }
+
+            .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            }
+
+            .card {
+            width: 100%;
+            aspect-ratio: 1/1;
+            perspective: 800px;
+            cursor: pointer;
+            }
+
+            .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform .5s;
+            transform-style: preserve-3d;
+            }
+
+            .card.flip .card-inner {
+            transform: rotateY(180deg);
+            }
+
+            .card-front,
+            .card-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            backface-visibility: hidden;
+            }
+
+            .card-front {
+            background: #ff9fcc;
+            }
+
+            .card-back {
+            background: #fff;
+            transform: rotateY(180deg);
+            box-shadow: inset 0 0 0 2px #ffb6d9;
+            }
+
+            .mc2-game {
+            background: white;
+            max-width: 460px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            }
+
+            .mc2-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            }
+
+            .mc2-card {
+            width: 100%;
+            aspect-ratio: 1/1;
+            perspective: 900px;
+            cursor: pointer;
+            }
+
+            .mc2-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform .5s;
+            transform-style: preserve-3d;
+            }
+
+            .mc2-card.flip .mc2-inner {
+            transform: rotateY(180deg);
+            }
+
+            .mc2-front,
+            .mc2-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            }
+
+            .mc2-front {
+            background: #ff9fcc;
+            color: white;
+            font-size: 22px;
+            }
+
+            .mc2-back {
+            background: #fff;
+            transform: rotateY(180deg);
+            overflow: hidden;
+            }
+
+            .mc2-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            }
+
+            .cth-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            color: #5a3a4e;
+            }
+
+            #cth-start {
+            margin: 15px 0;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 20px;
+            background: #ff9fcc;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            }
+
+            .cth-area {
+            position: relative;
+            height: 260px;
+            background: #ffe6f2;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 15px;
+            }
+
+            .cth-heart {
+            position: absolute;
+            font-size: 38px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform .15s;
+            }
+
+            .cth-heart:active {
+            transform: scale(1.3);
+            }
+
+            .quizCoupleNextBtn{
+                margin: 15px 0;
+                padding: 10px 22px;
+                border: none;
+                border-radius: 20px;
+                background: #ff9fcc;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+
+            .quizCoupleScore {
+            font-weight: bold;
+            color: #ff6fa5;
+            }
+
+            .quizCoupleOption {
+            background: #ffe3ef;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            }
+
+            .quizCoupleOption:hover {
+            background: #ffb8d3;
+            }
+
+            .quizCoupleCorrect {
+            background: #8cffc1 !important;
+            }
+
+            .quizCoupleWrong {
+            background: #ff9a9a !important;
+            }
+
+            .quizCoupleNextBtn {
+            margin-top: 15px;
+            padding: 10px 25px;
+            border: none;
+            background: #ff77aa;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            }
+
+            @keyframes quizFade {
+            from {opacity:0; transform: translateY(20px);}
+            to {opacity:1; transform: translateY(0);}
+            }
+
+
+            footer {
+                text-align: center;
+                padding: 20px;
+                margin-top: 20px;
+                font-size: 14px;
+                color: #7a5a70;
+            }
+
+            
+            @media (max-width: 600px) {
+                header h1 {
+                font-size: 24px;
+            }
+
+            nav a{
+                font-size: 10px;
+            }
+
+            .game-box{
+                margin: 20px 15px;
+                padding: 20px;
+                border-radius: 14px;
+            }
+            }
+
+            #startGame{
+                display: block;
+                margin: 30px auto 5px;
+                padding: 12px 25px;
+                font-size: 18px;
+                font-weight: bold;
+                border: none;
+                border-radius: 25px;
+                background-color: #ff9fcc;
+                color: white;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            #scrollTopBtn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+
+            width: 46px;
+            height: 46px;
+
+            background: #ff9fcc;
+            color: white;
+            border: none;
+            border-radius: 50%;
+
+            display: none;
+
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            z-index: 999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        #scrollTopBtn:hover {
+            background: #b0427d;
+            transform: scale(1.1);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Your Issa</h1>
+
+        <audio id="bgMusic">
+            <source src="Say Yes.mp3" type="audio/mpeg">
+        </audio>
+
+       <button id="playMusic" onclick="playAudio()">▶ Play Song</button>
+
+        <script>
+            const music = document.getElementById("bgMusic");
+            const btn = document.getElementById("playMusic");
+
+            btn.addEventListener("click", () => {
+                if (music.paused) {
+                    music.play();
+                    btn.textContent = "⏸ Pause";
+                } else {
+                    music.pause();
+                    btn.textContent = "▶ Play Song";
+                }
+            });
+        </script>
+    </header>
+
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#aboutme">About Issa</a>
+        <a href="#memories">Our Crumbs</a>
+        <a href="#grow">Issa grows up</a>
+        <a href="#message">Message</a>
+        <a href="game.html" class="active">Game</a>
+    </nav>
+
+<h1>WELCOME TO MINI GAMES PAGE!</h1>
+<p>jangan lupa lagu nya di play dulu yaa:D</p>
+
+    <div class="game-box">
+        <h2>Love Click Game </h2>
+        <p>Instruction: <br>Click "Start Game" button then click the heart as fast as you can in 10 seconds!</p>
+        <div id="timer">Time: 10</div>
+        <div id="score">Score: 0</div>
+        <button id="startGame">Start Game</button>
+        <button id="heartBtn">💗</button>
+
+        <p id="resultText"></p>
+    </div>
+
+
+    <div class="game-box">
+        <h2>Memory Card Couple</h2>
+        <p>Find all matching emojis!</p>
+        <div id="matchCount">Match: 0</div>
+
+        <div class="card-grid" id="cardGrid"></div>
+    </div>
+
+    <div class="game-box">
+        <h2>💞 Memory Card Couple 2.0 💞</h2>
+        <p>Find all our photo pairs!</p>
+        <div id="mc2-match">Match: 0</div>
+
+        <div class="mc2-grid" id="mc2Grid"></div>
+    </div>
+
+    <div class="game-box">
+    <h2>Catch The Heart 💗</h2>
+    <p>Catch as many hearts as you can in 15 seconds!</p>
+
+    <div class="cth-info">
+        <span id="cth-time">Time: 15</span>
+        <span id="cth-score">Score: 0</span>
+    </div>
+
+    <button id="cth-start">Start Game</button>
+
+    <div class="cth-area" id="cthArea">
+        <div class="cth-heart" id="cthHeart">💗</div>
+    </div>
+
+    <p id="cth-result"></p>
+    </div>
+
+    <section class="game-box">
+    <h2>Quiz About Us</h2>
+    <p class="quizCoupleScore">Score: <span id="quizCoupleScore">0</span></p>
+
+    <div id="quizCoupleContainer"></div>
+
+    <button class="quizCoupleNextBtn" onclick="nextQuizCouple()">Next</button>
+    </section>
+
+
+
+<footer>
+        © Your Issa's Page, made with love by Issa
+</footer>
+
+
+<script>
+        let score = 0;
+        let timeLeft = 10;
+        let timer;
+
+        const heartBtn = document.getElementById("heartBtn");
+        const startBtn = document.getElementById("startGame");
+        const scoreText = document.getElementById("score");
+        const timerText = document.getElementById("timer");
+        const resultText = document.getElementById("resultText");
+
+        heartBtn.onclick = () => {
+        if(timeLeft > 0){
+            score++;
+            scoreText.innerText = "Score: " + score;
+        }
+        };
+
+        startBtn.onclick = () => {
+        score = 0;
+        timeLeft = 10;
+        scoreText.innerText = "Score: 0";
+        timerText.innerText = "Time: 10";
+        resultText.innerText = "";
+
+        timer = setInterval(() => {
+            timeLeft--;
+            timerText.innerText = "Time: " + timeLeft;
+
+            if(timeLeft <= 0){
+            clearInterval(timer);
+            resultText.innerText = score > 30 
+                ? "OMG YOU REALLY LOVE HER 😭💗" 
+                : "Cute, but try again 😆💕";
+            }
+        },1000);
+        };
+
+
+// -----------------------------------------------------------
+const emojis = ["💗","💗","😍","😍","💋","💋","🌸","🌸","🐻","🐻","🍓","🍓"];
+
+let firstCard = null;
+let secondCard = null;
+let lock = false;
+let match = 0;
+
+const grid = document.getElementById("cardGrid");
+const matchText = document.getElementById("matchCount");
+
+emojis.sort(() => 0.5 - Math.random());
+
+emojis.forEach(icon => {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  card.innerHTML = `
+    <div class="card-inner">
+      <div class="card-front">?</div>
+      <div class="card-back">${icon}</div>
+    </div>
+  `;
+
+  card.addEventListener("click", () => flipCard(card));
+  grid.appendChild(card);
+});
+
+function flipCard(card){
+  if(lock || card === firstCard) return;
+
+  card.classList.add("flip");
+
+  if(!firstCard){
+    firstCard = card;
+    return;
+  }
+
+  secondCard = card;
+  lock = true;
+
+  const a = firstCard.querySelector(".card-back").innerText;
+  const b = secondCard.querySelector(".card-back").innerText;
+
+  if(a === b){
+    match++;
+    matchText.innerText = "Match: " + match;
+    resetTurn();
+
+    if(match === emojis.length / 2){
+      setTimeout(() => {
+        alert("YOU WIN 😭💗 Issa & Him Forever!");
+      },300);
+    }
+  } else {
+    setTimeout(() => {
+      firstCard.classList.remove("flip");
+      secondCard.classList.remove("flip");
+      resetTurn();
+    },800);
+  }
+}
+
+function resetTurn(){
+  [firstCard, secondCard, lock] = [null, null, false];
+}
+
+
+
+// --------------------------------------------------------------------------
+
+const mc2Images = [
+  "WhatsApp Image 2025-12-01 at 08.34.04_b3b84e78.jpg","WhatsApp Image 2025-12-01 at 08.34.04_b3b84e78.jpg",
+  "WhatsApp Image 2025-12-01 at 08.34.04_ad2cead7.jpg","WhatsApp Image 2025-12-01 at 08.34.04_ad2cead7.jpg",
+  "WhatsApp Image 2026-01-29 at 18.07.32.jpeg","WhatsApp Image 2026-01-29 at 18.07.32.jpeg",
+  "bxsea.jpg","bxsea.jpg",
+  "WhatsApp Image 2025-12-01 at 08.25.51_89c4f02f.jpg","WhatsApp Image 2025-12-01 at 08.25.51_89c4f02f.jpg",
+  "WhatsApp Image 2026-01-30 at 20.30.57.jpeg","WhatsApp Image 2026-01-30 at 20.30.57.jpeg",
+];
+
+let mc2First = null;
+let mc2Second = null;
+let mc2Lock = false;
+let mc2Match = 0;
+
+const mc2Grid = document.getElementById("mc2Grid");
+const mc2MatchText = document.getElementById("mc2-match");
+
+mc2Images.sort(() => 0.5 - Math.random());
+
+mc2Images.forEach(src => {
+  const card = document.createElement("div");
+  card.className = "mc2-card";
+
+  card.innerHTML = `
+    <div class="mc2-inner">
+      <div class="mc2-front">💗</div>
+      <div class="mc2-back"><img src="${src}"></div>
+    </div>
+  `;
+
+  card.addEventListener("click", () => mc2Flip(card));
+  mc2Grid.appendChild(card);
+});
+
+function mc2Flip(card){
+  if(mc2Lock || card === mc2First) return;
+
+  card.classList.add("flip");
+
+  if(!mc2First){
+    mc2First = card;
+    return;
+  }
+
+  mc2Second = card;
+  mc2Lock = true;
+
+  const a = mc2First.querySelector("img").src;
+  const b = mc2Second.querySelector("img").src;
+
+  if(a === b){
+    mc2Match++;
+    mc2MatchText.innerText = "Match: " + mc2Match;
+    mc2Reset();
+
+    if(mc2Match === mc2Images.length / 2){
+      setTimeout(() => {
+        alert("YOU WIN 😭💞 Issa & Him Forever!");
+      },300);
+    }
+  } else {
+    setTimeout(() => {
+      mc2First.classList.remove("flip");
+      mc2Second.classList.remove("flip");
+      mc2Reset();
+    },800);
+  }
+}
+
+function mc2Reset(){
+  [mc2First, mc2Second, mc2Lock] = [null, null, false];
+}
+
+
+// ---------------------------------------------------------------------
+
+let cthScore = 0;
+let cthTime = 15;
+let cthTimer;
+
+const cthHeart = document.getElementById("cthHeart");
+const cthArea = document.getElementById("cthArea");
+const cthScoreText = document.getElementById("cth-score");
+const cthTimeText = document.getElementById("cth-time");
+const cthStartBtn = document.getElementById("cth-start");
+const cthResult = document.getElementById("cth-result");
+
+function cthMoveHeart(){
+  const maxX = cthArea.clientWidth - 40;
+  const maxY = cthArea.clientHeight - 40;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  cthHeart.style.left = x + "px";
+  cthHeart.style.top = y + "px";
+}
+
+cthHeart.onclick = () => {
+  if(cthTime > 0){
+    cthScore++;
+    cthScoreText.innerText = "Score: " + cthScore;
+    cthMoveHeart();
+  }
+};
+
+cthStartBtn.onclick = () => {
+  cthScore = 0;
+  cthTime = 15;
+  cthScoreText.innerText = "Score: 0";
+  cthTimeText.innerText = "Time: 15";
+  cthResult.innerText = "";
+
+  cthMoveHeart();
+
+  clearInterval(cthTimer);
+
+  cthTimer = setInterval(() => {
+    cthTime--;
+    cthTimeText.innerText = "Time: " + cthTime;
+
+    cthMoveHeart();
+
+    if(cthTime <= 0){
+      clearInterval(cthTimer);
+      cthResult.innerText = cthScore > 20 
+        ? "OMG FAST HANDS" 
+        : "Cutee 😆 Try again!";
+    }
+  },1000);
+};
+
+// -----------------------------------------------------------------
+
+
+const quizCoupleData = [
+  {
+    question: "Dimana first date kita?",
+    options: ["CCM", "Suntime", "Tepian", "Ruki"],
+    answer: 2
+  },
+  {
+    question: "Siapa yang duluan chat?",
+    options: ["Bella", "Dirga"],
+    answer: 1
+  },
+  {
+    question: "Makanan favorit aku?",
+    options: ["Keju", "Seblak", "Sushi", "Pizza"],
+    answer: 0
+  },
+  {
+    question: "Siapa yang paling bucin?",
+    options: ["Dirga", "Bella", "Sama aja", "Ga ada"],
+    answer: 2
+  },
+    {
+    question: "Berapa size sepatu aku?",
+    options: ["40", "39", "35", "36"],
+    answer: 3
+  },
+    {
+    question: "Bulan apa kita jadian?",
+    options: ["Oktober", "November", "Desember", "September"],
+    answer: 0
+  },
+    {
+    question: "Apa warna favorit aku?",
+    options: ["Pink", "Putih", "Hitam", "Biru"],
+    answer: 2
+  },
+    {
+    question: "Berapa NIM aku?",
+    options: ["3337240021", "3337240020", "3337240043", "3337240031"],
+    answer: 3
+  },
+    {
+    question: "Grup kpop apa yang paling aku suka?",
+    options: ["EXO", "NCT", "BTS", "BLACKPINK"],
+    answer: 0
+  },
+    {
+    question: "Hari apa aku lahir??",
+    options: ["Senin", "Rabu", "Jumat", "Minggu"],
+    answer: 2
+  }
+];
+
+let quizCoupleIndex = 0;
+let quizCoupleScore = 0;
+let quizCoupleLocked = false;
+
+const quizCoupleContainer = document.getElementById("quizCoupleContainer");
+const quizCoupleScoreText = document.getElementById("quizCoupleScore");
+
+function loadQuizCouple() {
+  quizCoupleLocked = false;
+  const data = quizCoupleData[quizCoupleIndex];
+
+  quizCoupleContainer.innerHTML = `
+    <h3>${data.question}</h3>
+    ${data.options.map((opt,i)=>`
+      <div class="quizCoupleOption" onclick="selectQuizCouple(this, ${i})">${opt}</div>
+    `).join("")}
+  `;
+}
+
+function selectQuizCouple(el, index) {
+  if (quizCoupleLocked) return;
+  quizCoupleLocked = true;
+
+  const correct = quizCoupleData[quizCoupleIndex].answer;
+
+  if(index === correct){
+    el.classList.add("quizCoupleCorrect");
+    quizCoupleScore++;
+    quizCoupleScoreText.textContent = quizCoupleScore;
+  } else {
+    el.classList.add("quizCoupleWrong");
+    document.querySelectorAll(".quizCoupleOption")[correct]
+      .classList.add("quizCoupleCorrect");
+  }
+}
+
+function nextQuizCouple() {
+  quizCoupleIndex++;
+  if (quizCoupleIndex < quizCoupleData.length) {
+    loadQuizCouple();
+  } else {
+    quizCoupleContainer.innerHTML = `
+      <h3>Quiz Selesai</h3>
+      <p>Score kamu: ${quizCoupleScore}/${quizCoupleData.length}</p>
+      <p>${quizCoupleScore >= 7 ? "Kita jodoh kayaknya:p" : "Harus ulang lagi!"}</p>
+    `;
+  }
+}
+
+loadQuizCouple();
+
+// ----------------------------------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const reveals = document.querySelectorAll('.reveal');
+
+  window.addEventListener('scroll', () => {
+    reveals.forEach(el => {
+      const windowHeight = window.innerHeight;
+      const elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100) {
+        el.classList.add('active');
+      }
+    });
+  });
+
+  const scrollBtn = document.getElementById("scrollTopBtn");
+
+  window.addEventListener("scroll", function () {
+    if (document.documentElement.scrollTop > 200) {
+      scrollBtn.style.display = "block";
+    } else {
+      scrollBtn.style.display = "none";
+    }
+  });
+
+  scrollBtn.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+});
+
+</script>
+<button id="scrollTopBtn">↑</button>
+
+
+</body>
+</html>
