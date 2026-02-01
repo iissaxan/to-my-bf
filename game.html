@@ -521,6 +521,24 @@
 
 
 <script>
+
+    let score = 0;
+let timeLeft = 10;
+let timer;
+
+const heartBtn = document.getElementById("heartBtn");
+const startBtn = document.getElementById("startGame");
+const scoreText = document.getElementById("score");
+const timerText = document.getElementById("timer");
+const resultText = document.getElementById("resultText");
+
+heartBtn.onclick = () => {
+  if (timeLeft > 0) {
+    score++;
+    scoreText.innerText = "Score: " + score;
+  }
+};
+
         startBtn.onclick = () => {
   clearInterval(timer); // ⬅️ stop timer lama dulu
 
