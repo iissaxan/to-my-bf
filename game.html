@@ -556,8 +556,8 @@
             if(timeLeft <= 0){
             clearInterval(timer);
             resultText.innerText = score > 30 
-                ? "OMG YOU REALLY LOVE HER 😭💗" 
-                : "Cute, but try again 😆💕";
+                ? "Wow banyak sekali hearts nyaa, kamu sayang aku ya😸😸" 
+                : "SEDIKIT BANGET??? COBA LAGI😤😤😤";
             }
         },1000);
         };
@@ -614,7 +614,7 @@ function flipCard(card){
 
     if(match === emojis.length / 2){
       setTimeout(() => {
-        alert("YOU WIN 😭💗 Issa & Him Forever!");
+        alert("KAMU MENANGGG!!!!");
       },300);
     }
   } else {
@@ -691,7 +691,7 @@ function mc2Flip(card){
 
     if(mc2Match === mc2Images.length / 2){
       setTimeout(() => {
-        alert("YOU WIN 😭💞 Issa & Him Forever!");
+        alert("KAMU MENANGGG LAGIII HIHI HEBAT PACARKU!!!!");
       },300);
     }
   } else {
@@ -760,8 +760,8 @@ cthStartBtn.onclick = () => {
     if(cthTime <= 0){
       clearInterval(cthTimer);
       cthResult.innerText = cthScore > 20 
-        ? "OMG FAST HANDS" 
-        : "Cutee 😆 Try again!";
+        ? "WOWWWW THAT WAS FASTT🫡🫡" 
+        : "Ih cemen, ulang lagi!!!";
     }
   },1000);
 };
@@ -866,7 +866,7 @@ function nextQuizCouple() {
     quizCoupleContainer.innerHTML = `
       <h3>Quiz Selesai</h3>
       <p>Score kamu: ${quizCoupleScore}/${quizCoupleData.length}</p>
-      <p>${quizCoupleScore >= 7 ? "Kita jodoh kayaknya:p" : "Harus ulang lagi!"}</p>
+      <p>${quizCoupleScore >= 7 ? "Gede juga score nya, kamu suami aku ya?🤗" : "Harus ulang lagi!"}</p>
     `;
   }
 }
